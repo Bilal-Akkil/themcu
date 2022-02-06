@@ -1,6 +1,8 @@
 const MCUAPIURL =
   "https://api.themoviedb.org/4/list/7094442?api_key=404e20cb3319c57b15dac6ff2ebc6d32";
 
+const FULLMARVELURL = "https://api.themoviedb.org/4/list/8191157?api_key=404e20cb3319c57b15dac6ff2ebc6d32";
+
 const MCUTVAPIURL =
   "https://api.themoviedb.org/4/list/7094519?api_key=404e20cb3319c57b15dac6ff2ebc6d32";
 
@@ -33,7 +35,7 @@ async function getMCU() {
       //console.log(background);
 
       div.innerHTML = `
-        <div class="movie_card" id="bright">
+        <div class="movie_card">
         <div class="info_section">
           <div class="movie_header">
             <img class="locandina" src="${src}" loading="lazy"/>
@@ -52,11 +54,63 @@ async function getMCU() {
       </div>
         `;
 
-      var divcon = document.getElementById("MCUcon");
+      var divcon = document.getElementById("MCUcontent");
       divcon.appendChild(div);
     });
   }
   //return respDATA;
+}
+
+async function getFULLMARVEL(){
+  var currpage;
+  var maxpages = 10;
+  for (currpage = 1; currpage <= maxpages; currpage += 1) {
+    const resp = await fetch(FULLMARVELURL + "&page=" + currpage);
+    const respDATA = await resp.json();
+
+    //console.log(respDATA);
+
+    respDATA.results.forEach((item) => {
+      const div = document.createElement("div");
+      //const poster = document.createElement("img");
+      var src = IMGPATH + item.poster_path;
+      var name;
+      var rDate;
+      if (item.media_type == "movie") {
+        name = item.original_title;
+        rDate = item.release_date;
+      } else {
+        name = item.name;
+        rDate = item.first_air_date;
+      }
+      var desc = item.overview;
+      var background = IMGPATH + item.backdrop_path;
+      //console.log(background);
+
+      div.innerHTML = `
+        <div class="movie_card">
+        <div class="info_section">
+          <div class="movie_header">
+            <img class="locandina" src="${src}" loading="lazy"/>
+            <h1>${name}</h1>
+            <h4>${rDate}</h4>
+          </div>
+          <div class="movie_desc">
+            <p class="text">
+              ${desc}
+            </p>
+          </div>
+        </div>
+        <div class="blur_back bright_back">
+        <img src="${background}" loading="lazy"/>
+        </div>
+      </div>
+        `;
+
+      var divcon = document.getElementById("FULLMARVELcontent");
+      divcon.appendChild(div);
+    });
+  }
 }
 
 async function getMCUTV() {
@@ -79,7 +133,7 @@ async function getMCUTV() {
       //console.log(background);
 
       div.innerHTML = `
-        <div class="movie_card" id="">
+        <div class="movie_card">
         <div class="info_section">
           <div class="movie_header">
             <img class="locandina" src="${src}" loading="lazy"/>
@@ -98,7 +152,7 @@ async function getMCUTV() {
       </div>
         `;
 
-      var divcon = document.getElementById("MCUTVcon");
+      var divcon = document.getElementById("MCUTVcontent");
       divcon.appendChild(div);
     });
   }
@@ -110,8 +164,6 @@ remoteConfig.settings.minimumFetchIntervalMillis = 0;
 remoteConfig.defaultConfig = {
   welcome_messsage: "Enjoy.",
 };
-
-
 
 var remoteConf = document.getElementById("remotecon");
 
@@ -127,4 +179,36 @@ remoteConfig
   });
 
 getMCU();
+getFULLMARVEL();
 getMCUTV();
+
+function MCUcollapse() {
+  var div = document.getElementById("MCUcontent");
+
+  if (div.style.display == "block") {
+    div.style.display = "none";
+  } else {
+    div.style.display = "block";
+  }
+}
+
+function FULLMARVELcollapse() {
+  var div = document.getElementById("FULLMARVELcontent");
+
+  if (div.style.display == "block") {
+    div.style.display = "none";
+  } else {
+    div.style.display = "block";
+  }
+}
+
+
+function MCUTVcollapse() {
+  var div = document.getElementById("MCUTVcontent");
+
+  if (div.style.display == "block") {
+    div.style.display = "none";
+  } else {
+    div.style.display = "block";
+  }
+}

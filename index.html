@@ -24,16 +24,35 @@
   <body>
     <p>By: Bilal Akkil</p> <p id="remotecon"></p>
 
+    <center>
+      <h3>click the header to expand/collapse</h3>
+    </center>
+
     <div id="MCUcon">
       <center>
-        <h1 class="mcu">MARVEL CINEMATIC UNIVERSE</h1>
+        <h1 class="mcu" onclick="MCUcollapse()">MARVEL CINEMATIC UNIVERSE</h1>
       </center>
+      <div id="MCUcontent" style="display: none;">
+
+      </div>
+    </div>
+
+    <div id="FULLMARVELcon">
+      <center>
+        <h1 class="mcu" onclick="FULLMARVELcollapse()">FULL MARVEL MOVIES</h1>
+      </center>
+      <div id="FULLMARVELcontent" style="display: none;">
+
+      </div>
     </div>
 
     <div id="MCUTVcon">
       <center>
-        <h1 class="mcu">MARVEL TELEVISION SERIES</h1>
+        <h1 class="mcu" onclick="MCUTVcollapse()">MARVEL TELEVISION SERIES</h1>
       </center>
+
+      <div id="MCUTVcontent" style="display: none;">
+
     </div>
 
     <!-- The core Firebase JS SDK is always required and must be listed first -->
