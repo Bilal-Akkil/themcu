@@ -1,5 +1,14 @@
 {
   "projects": {
     "default": "themcu"
+  },
+  "targets": {
+    "themcu-2021": {
+      "hosting": {
+        "themcu.web.app": [
+          "themcu"
+        ]
+      }
+    }
   }
 }

@@ -1,6 +1,7 @@
 {
   "hosting": {
     "public": "public",
+    "target": "themcu.web.app",
     "ignore": [
       "firebase.json",
       "**/.*",
