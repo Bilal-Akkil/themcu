@@ -1,6 +1,6 @@
 {
   "projects": {
-    "default": "themcu"
+    "default": "themcu-2021"
   },
   "targets": {
     "themcu-2021": {
